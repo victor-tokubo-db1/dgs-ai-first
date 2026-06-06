@@ -1,0 +1,99 @@
+from __future__ import annotations
+
+import argparse
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import chromadb
+from sentence_transformers import SentenceTransformer
+
+# Mantidos iguais à etapa de ingestão
+COLLECTION_NAME = "novatech_docs"
+EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
+
+
+@dataclass
+class SearchResult:
+    chunk_id: str
+    text: str
+    metadata: dict[str, Any]
+    distance: float
+    similarity_score: float
+
+
+def search_similar_chunks(
+    question: str,
+    n_results: int = 5,
+    base_dir: Path | None = None,
+) -> list[SearchResult]:
+    """
+    Recebe pergunta, gera embedding, busca top-N chunks no ChromaDB
+    e retorna chunks com score de similaridade.
+    """
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("question deve ser uma string nao vazia")
+    if n_results <= 0:
+        raise ValueError("n_results deve ser maior que zero")
+
+    work_dir = base_dir or Path(__file__).resolve().parent
+    db_path = work_dir / "chroma_db"
+
+    if not db_path.exists():
+        raise FileNotFoundError(f"ChromaDB nao encontrado em: {db_path}")
+
+    client = chromadb.PersistentClient(path=str(db_path))
+    collection = client.get_collection(name=COLLECTION_NAME)
+
+    model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    query_embedding = model.encode([question.strip()], normalize_embeddings=True).tolist()
+
+    result = collection.query(
+        query_embeddings=query_embedding,
+        n_results=n_results,
+        include=["documents", "metadatas", "distances"],
+    )
+
+    ids = result.get("ids", [[]])[0]
+    docs = result.get("documents", [[]])[0]
+    metas = result.get("metadatas", [[]])[0]
+    dists = result.get("distances", [[]])[0]
+
+    output: list[SearchResult] = []
+    for chunk_id, text, metadata, distance in zip(ids, docs, metas, dists):
+        # Como o índice foi criado com cosine, distância menor = mais similar.
+        # Convertemos para score intuitivo em [0,1] (clipado).
+        similarity = max(0.0, min(1.0, 1.0 - float(distance)))
+        output.append(
+            SearchResult(
+                chunk_id=chunk_id,
+                text=text,
+                metadata=metadata or {},
+                distance=float(distance),
+                similarity_score=similarity,
+            )
+        )
+
+    return output
+
+
+def _cli() -> None:
+    parser = argparse.ArgumentParser(description="Busca semantica no ChromaDB")
+    parser.add_argument("question", type=str, help="Pergunta do atendente")
+    parser.add_argument("-n", "--n-results", type=int, default=5, help="Top N chunks")
+    args = parser.parse_args()
+
+    results = search_similar_chunks(args.question, n_results=args.n_results)
+
+    print(f"\nPergunta: {args.question}")
+    print(f"Resultados: {len(results)}\n")
+    for i, r in enumerate(results, 1):
+        print(f"[{i}] score={r.similarity_score:.4f} distance={r.distance:.4f}")
+        print(f"Fonte: {r.metadata.get('source_document', 'N/A')}")
+        print(f"Secao: {r.metadata.get('secao', 'N/A')}")
+        print(f"Texto: {r.text[:260].replace(chr(10), ' ')}...")
+        print("-" * 80)
+
+
+if __name__ == "__main__":
+    _cli()

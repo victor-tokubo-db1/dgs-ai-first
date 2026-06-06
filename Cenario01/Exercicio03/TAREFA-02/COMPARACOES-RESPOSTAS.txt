@@ -1,0 +1,316 @@
+COMPARAÇÕES RESPOSTAS
+
+1) PRIMEIRA PERGUNTA - "Qual o prazo de devolução?"
+
+| Pergunta | Chunks que DEVEM ser recuperados | Chunks que podem aparecer (relevância menor) |
+|----------|----------------------------------|----------------------------------------------|
+| "Qual o prazo de devolução?" | POL-001-A, POL-001-B | POL-001-C |
+
+Somente trouxe "POL-001-C" como [CHUNK 2]; "POL-001-A", "POL-001-B" não foram mencionados
+Scores e chunks recuperados abaixo:
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.5. Custos de devolução
+Score: 0.5648
+ChunkID: 7011ce627cb76789e2762cd8d06a683c47cb79c8
+Conteudo:
+- Defeito ou erro da NovaTech (carga errada, avaria em trânsito): devolução sem custo para o cliente.
+- Desistência do cliente (carga correta, sem defeito): o custo do frete reverso é do cliente, calculado com os mesmos multiplicadores do frete original.
+- Prazo expirado (solicitação após 7 dias úteis): não elegível para devolução padrão. Encaminhar ao Comercial para negociação caso a caso.
+
+[CHUNK 2]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.3. Procedimento de devolução
+Score: 0.5305
+ChunkID: 809787c0a657544da77474e3f861a1d807998adf
+Conteudo:
+1. O cliente abre chamado no Portal do Cliente (portal.novatech.com.br), selecionando a categoria "Devolução de Mercadoria".
+2. O chamado deve incluir: número do CT-e (Conhecimento de Transporte Eletrônico), fotos da mercadoria no estado atual (mínimo 3 fotos: embalagem externa, etiqueta de identificação, e conteúdo), e motivo da devolução.
+3. O time de atendimento tem 4 horas úteis para triagem do chamado (verificar elegibilidade, documentação e prazo).
+4. Se elegível, a coleta reversa é agendada em até 2 dias úteis após aprovação.
+5. O reembolso ou crédito é processado em até 5 dias úteis após o recebimento da mercadoria devolvida no centro de distribuição.
+
+[CHUNK 3]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 3. Prazo de entrega para frete especial
+Score: 0.5254
+ChunkID: 5705b3528360746258510016cc50f02771e6b7d6
+Conteudo:
+O prazo de entrega para frete especial é calculado como o prazo padrão da rota + 2 dias úteis adicionais para manuseio de carga pesada.
+
+[CHUNK 4]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 3. Definição de incidente crítico
+Score: 0.5059
+ChunkID: bb7fea777866cef11e7038b974ca06a67c984ecf
+Conteudo:
+Um incidente é classificado como crítico quando atende a pelo menos um dos seguintes critérios:
+
+- Carga com valor declarado acima de R$ 100.000 está com status desconhecido há mais de 6 horas.
+- Carga perigosa com qualquer irregularidade de documentação ou rastreamento.
+- Mais de 5 chamados do mesmo cliente nas últimas 24 horas sobre o mesmo problema.
+- Qualquer situação que envolva risco à segurança de pessoas.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte
+Score: 0.4756
+ChunkID: d2399652d27640f71c513474cefd639ed47c8bf0
+Conteudo:
+**Versão:** Não controlada
+**Última atualização:** Diversas (documento colaborativo)
+**Responsável:** Nenhum responsável formal — mantido informalmente pelo time de atendimento
+**Classificação:** Documento informal — NÃO validado por Compliance ou Operações. Representa o conhecimento prático do time, mas pode conter informações desatualizadas ou imprecisas.
+
+Aviso interno: Este FAQ foi criado organicamente pelo time de atendimento ao longo de 2 anos. As respostas refletem a experiência prática dos atendentes, mas NÃO foram validadas contra os documentos oficiais (POL, PROC, SLA). Use com cautela e sempre confirme informações críticas na documentação normativa.
+=== FIM DO CONTEXTO ===
+
+2) SEGUNDA PERGUNTA - "Qual o SLA do cliente Platinum?"
+
+| Pergunta | Chunks que DEVEM ser recuperados | Chunks que podem aparecer (relevância menor) |
+|----------|----------------------------------|----------------------------------------------|
+| "Qual o SLA do cliente Platinum?" | SLA-2024-A (contém "não existem outros tiers") | FAQ-15 |
+
+Trouxe "SLA-2024-A" como [CHUNK 3] e "FAQ-15" como [CHUNK 1]
+Scores e chunks recuperados abaixo:
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 15 — "Cliente diz que é Platinum. Existe esse tier?"
+Score: 0.5382
+ChunkID: 0af9074aa24c5a0d44d5f35a3808a31e85e6ce2c
+Conteudo:
+Não existe tier Platinum na NovaTech. Às vezes o cliente confunde com outra transportadora ou com o programa de fidelidade antigo que foi descontinuado em 2022. Oriente que nossos tiers são Gold, Silver e Standard e peça o número do contrato para verificar.
+
+[CHUNK 2]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 5. Medição e reportes
+Score: 0.5030
+ChunkID: 5ff68267786091b39f13aafd01c113c10261094f
+Conteudo:
+Os SLAs são medidos pelo sistema de chamados (Azure DevOps) a partir do timestamp de abertura do chamado. O relógio de SLA pausa fora do horário comercial (08h-18h, dias úteis) para chamados gerais, mas não pausa para incidentes críticos de clientes Gold.
+
+[CHUNK 3]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 1. Classificação de clientes
+Score: 0.4996
+ChunkID: a85c4143827ce6a4b4da8d5b9e83839b32c8fd39
+Conteudo:
+A NovaTech classifica seus clientes em 3 (três) tiers com base no volume mensal de operações e no valor do contrato:
+
+| Tier | Critério de elegibilidade | Revisão |
+|------|--------------------------|---------|
+| Gold | Contrato anual acima de R$ 500.000 OU mais de 200 operações/mês | Semestral |
+| Silver | Contrato anual entre R$ 100.000 e R$ 500.000 OU entre 50 e 200 operações/mês | Semestral |
+| Standard | Todos os demais clientes | Anual |
+
+Nota: Não existem outros tiers além dos três listados acima. Solicitações de SLA diferenciado fora desses tiers devem ser encaminhadas ao Comercial para análise de viabilidade.
+
+[CHUNK 4]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.5. Custos de devolução
+Score: 0.4962
+ChunkID: 7011ce627cb76789e2762cd8d06a683c47cb79c8
+Conteudo:
+- Defeito ou erro da NovaTech (carga errada, avaria em trânsito): devolução sem custo para o cliente.
+- Desistência do cliente (carga correta, sem defeito): o custo do frete reverso é do cliente, calculado com os mesmos multiplicadores do frete original.
+- Prazo expirado (solicitação após 7 dias úteis): não elegível para devolução padrão. Encaminhar ao Comercial para negociação caso a caso.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 3 — "Cliente perguntou se pode devolver carga perigosa. O que respondo?"
+Score: 0.4682
+ChunkID: ca0d7aca5177dabb9b8ffdd6d385ba14386c9510
+Conteudo:
+Na prática, a gente orienta o cliente a ligar no ramal 4500 (Gestão de Riscos). Oficialmente não pode pelo processo padrão, mas já tiveram casos em que o pessoal de Riscos autorizou exceção. Então não diga que é impossível — diga que precisa de tratamento especial.
+=== FIM DO CONTEXTO ===
+
+3) TERCEIRA PERGUNTA - "Frete para 300kg para Salvador?"
+
+| Pergunta | Chunks que DEVEM ser recuperados | Chunks que podem aparecer (relevância menor) |
+|----------|----------------------------------|----------------------------------------------|
+| "Frete para 300kg para Salvador?" | Nenhum chunk relevante (frete padrão < 500kg não está documentado) | PROC-042v2-B (parcialmente relevante, mas não cobre < 500kg) |
+
+Trouxe chunks que não tem relação com a pergunta, também não trouxe "PROC-042v2-B"
+Scores e chunks recuperados abaixo:
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 1. Objetivo
+Score: 0.5072
+ChunkID: f2af734ef3840e658f492465b25f1cf0cf3e30ed
+Conteudo:
+Definir a fórmula e os parâmetros para cálculo de frete especial aplicável a cargas com peso acima de 500kg.
+
+[CHUNK 2]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 1. Objetivo
+Score: 0.4566
+ChunkID: 828c4f4b55d2aea91ccf2d9dfce4860cd8079b1d
+Conteudo:
+Definir a fórmula e os parâmetros atualizados para cálculo de frete especial aplicável a cargas com peso acima de 500kg. Os multiplicadores foram revisados para refletir os custos operacionais atualizados de cada região.
+
+[CHUNK 3]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 27 — "O tracking mostra 'em trânsito' há 5 dias. O que faço?"
+Score: 0.4529
+ChunkID: f5138dc3995bdce675dc5cdcacacb4bfe7f7dd70
+Conteudo:
+Depende da rota. Rotas para o Norte podem levar até 10 dias úteis. Para Sul/Sudeste, mais de 3 dias parado é estranho. Abra um chamado de rastreamento e classifique como prioridade alta se for Gold ou se o valor da carga for acima de R$ 50.000.
+
+[CHUNK 4]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 2. Fórmula de cálculo
+Score: 0.4415
+ChunkID: dd404a488a97649b2ee5022afc760184b192917e
+Conteudo:
+O frete especial é calculado como:
+
+Valor do frete = Valor base × Multiplicador regional × Fator de peso
+
+Onde:
+- Valor base = tarifa publicada na tabela mensal de fretes.
+- Multiplicador regional = fator aplicado conforme a região de destino (seção 2.1).
+- Fator de peso = 1.0 para cargas de 500kg a 1.000kg; 1.15 para cargas de 1.001kg a 3.000kg; 1.4 para cargas acima de 3.000kg.
+
+[CHUNK 5]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 4. Condições especiais
+Score: 0.4395
+ChunkID: 13f99ec419d5c5a8574516e2dd634c79700520a0
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas). Nota: a PROC-043 está em processo de revisão pelo Compliance e pode sofrer alterações.
+- Descontos de volume: a partir de 8 fretes especiais/mês para o mesmo cliente, aplicar desconto de 5% sobre o multiplicador regional. Acima de 15 fretes/mês, desconto de 10%. Descontos maiores requerem aprovação da Diretoria Comercial.
+=== FIM DO CONTEXTO ===
+
+4) QUARTA PERGUNTA - "Carga perigosa com frete expresso?"
+
+| Pergunta | Chunks que DEVEM ser recuperados | Chunks que podem aparecer (relevância menor) |
+|----------|----------------------------------|----------------------------------------------|
+| "Carga perigosa com frete expresso?" | FAQ-32 | Nenhum documento formal cobre isso |
+
+Trouxe chunks que não tem relação com a pergunta
+Scores e chunks recuperados abaixo:
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 4. Condições especiais
+Score: 0.5789
+ChunkID: 28e3ad36e1307f80060bf96b3b2b60e4824bf0bd
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas).
+- Descontos de volume (mais de 10 fretes especiais/mês para o mesmo cliente) devem ser negociados pelo Comercial e registrados em aditivo contratual.
+
+[CHUNK 2]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 3. Definição de incidente crítico
+Score: 0.5655
+ChunkID: bb7fea777866cef11e7038b974ca06a67c984ecf
+Conteudo:
+Um incidente é classificado como crítico quando atende a pelo menos um dos seguintes critérios:
+
+- Carga com valor declarado acima de R$ 100.000 está com status desconhecido há mais de 6 horas.
+- Carga perigosa com qualquer irregularidade de documentação ou rastreamento.
+- Mais de 5 chamados do mesmo cliente nas últimas 24 horas sobre o mesmo problema.
+- Qualquer situação que envolva risco à segurança de pessoas.
+
+[CHUNK 3]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 22 — "Cliente quer saber sobre seguro de carga. O que falar?"
+Score: 0.5439
+ChunkID: 5339eb950a44ab54d0b1cf33274f8c5e1fdcaa9c
+Conteudo:
+A NovaTech oferece seguro de carga como adicional. O valor é 0,3% do valor declarado da mercadoria para cargas padrão e 0,8% para cargas perigosas. Detalhe: isso vale para contratos a partir de 2023. Contratos mais antigos podem ter percentuais diferentes — confirme com o Comercial.
+
+[CHUNK 4]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 4. Condições especiais
+Score: 0.5178
+ChunkID: 13f99ec419d5c5a8574516e2dd634c79700520a0
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas). Nota: a PROC-043 está em processo de revisão pelo Compliance e pode sofrer alterações.
+- Descontos de volume: a partir de 8 fretes especiais/mês para o mesmo cliente, aplicar desconto de 5% sobre o multiplicador regional. Acima de 15 fretes/mês, desconto de 10%. Descontos maiores requerem aprovação da Diretoria Comercial.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 38 — "Cliente quer saber a política para carga que chegou danificada."
+Score: 0.5147
+ChunkID: 676ba9fe4d99c0e1d45c5bc7f9affc9b24bc6b0a
+Conteudo:
+Carga danificada em trânsito tem processo diferente de devolução. O cliente precisa registrar a ocorrência em até 48h após o recebimento, com fotos e laudo se possível. A NovaTech investiga e, se comprovada responsabilidade nossa, reembolsa integralmente. Mas isso passa pelo Jurídico, não pelo atendimento normal — encaminhe para o e-mail sinistros@novatech.com.br.
+=== FIM DO CONTEXTO ===
+
+5) QUINTA PERGUNTA - "Qual o multiplicador para o Sudeste?"
+
+| Pergunta | Chunks que DEVEM ser recuperados | Chunks que podem aparecer (relevância menor) |
+|----------|----------------------------------|----------------------------------------------|
+| "Qual o multiplicador para o Sudeste?" | PROC-042v2-B | PROC-042-B (versão antiga — contradição: 1.0 vs 1.1) |
+
+Trouxe "PROC-042v2-B" como [CHUNK 3], trouxe "PROC-042-B" como [CHUNK 04]
+Scores e chunks recuperados abaixo:
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.4. Devoluções parciais
+Score: 0.5234
+ChunkID: 24cee59c96e5df20dc608e69ec47cf9153d2ee8e
+Conteudo:
+Quando a entrega envolver múltiplos volumes, o cliente pode devolver volumes individuais. Cada volume devolvido segue o mesmo procedimento da seção 3.3. O cálculo de reembolso é proporcional ao peso/valor do volume devolvido, conforme o CT-e.
+
+[CHUNK 2]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 8 — "Como funciona o frete especial?"
+Score: 0.5100
+ChunkID: 9fdb0bd4961ca122e6f6bc79a2438ad07a7ce9f5
+Conteudo:
+Acima de 500kg, aplica a tabela de multiplicadores por região. Cuidado: existem duas versões da PROC-042. A mais recente tem multiplicadores mais altos. Na dúvida, use a mais recente (v2), mas se o cliente reclamar do valor, pode ser que o contrato dele ainda esteja na tabela antiga.
+
+[CHUNK 3]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 2. Fórmula de cálculo > 2.1. Multiplicadores regionais (atualizados em novembro/2023)
+Score: 0.4959
+ChunkID: 61967e9accdc8705cea60205f21fa7949b874bd8
+Conteudo:
+| Região | Multiplicador |
+|--------|--------------|
+| Sul | 1.3 |
+| Sudeste | 1.1 |
+| Centro-Oeste | 1.4 |
+| Nordeste | 1.5 |
+| Norte | 1.8 |
+
+[CHUNK 4]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 2. Fórmula de cálculo > 2.1. Multiplicadores regionais
+Score: 0.4944
+ChunkID: 907803a1cebcc00bef4785d84d0bb2ed5a0508e6
+Conteudo:
+| Região | Multiplicador |
+|--------|--------------|
+| Sul | 1.2 |
+| Sudeste | 1.0 |
+| Centro-Oeste | 1.3 |
+| Nordeste | 1.4 |
+| Norte | 1.6 |
+
+[CHUNK 5]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.3. Procedimento de devolução
+Score: 0.4894
+ChunkID: 809787c0a657544da77474e3f861a1d807998adf
+Conteudo:
+1. O cliente abre chamado no Portal do Cliente (portal.novatech.com.br), selecionando a categoria "Devolução de Mercadoria".
+2. O chamado deve incluir: número do CT-e (Conhecimento de Transporte Eletrônico), fotos da mercadoria no estado atual (mínimo 3 fotos: embalagem externa, etiqueta de identificação, e conteúdo), e motivo da devolução.
+3. O time de atendimento tem 4 horas úteis para triagem do chamado (verificar elegibilidade, documentação e prazo).
+4. Se elegível, a coleta reversa é agendada em até 2 dias úteis após aprovação.
+5. O reembolso ou crédito é processado em até 5 dias úteis após o recebimento da mercadoria devolvida no centro de distribuição.
+=== FIM DO CONTEXTO ===

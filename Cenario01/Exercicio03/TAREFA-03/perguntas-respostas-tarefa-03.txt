@@ -1,0 +1,87 @@
+PERGUNTA 01 - Qual o prazo de devolução?
+
+RESPOSTA:
+
+Prazo de Devolução
+O cliente tem 7 dias úteis a partir do recebimento da mercadoria para solicitar a devolução. Solicitações após esse prazo não são elegíveis para devolução padrão e devem ser encaminhadas ao Comercial para negociação caso a caso.
+Fonte: POL-001-politica-devolucao.md — Seção 3.5 (Custos de devolução)
+
+Prazos internos do processo, após abertura do chamado:
+
+4 horas úteis para triagem pelo time de atendimento
+2 dias úteis para agendamento da coleta reversa (após aprovação)
+5 dias úteis para reembolso ou crédito (após recebimento da mercadoria no CD)
+
+Fonte: POL-001-politica-devolucao.md — Seção 3.3 (Procedimento de devolução)
+
+============
+
+PERGUNTA 02 - Qual o SLA do cliente Platinum?
+
+RESPOSTA:
+
+O tier Platinum não existe na NovaTech. Os únicos tiers disponíveis são Gold, Silver e Standard.
+O cliente pode estar confundindo com outra transportadora ou com o programa de fidelidade antigo, descontinuado em 2022. Portanto, não há SLA associado a um tier "Platinum".
+Ação recomendada: Solicite o número do contrato do cliente para identificar o tier correto e, com base nisso, aplicar o SLA correspondente.
+
+Fontes utilizadas:
+
+FAQ-atendimento.md — Item 15: "Cliente diz que é Platinum. Existe esse tier?"
+SLA-2024-tabela-sla-clientes.md — Seção 1: Classificação de clientes (confirma que existem apenas 3 tiers: Gold, Silver e Standard)
+
+============
+
+PERGUNTA 03 - Frete para 300kg para Salvador?
+
+RESPOSTA:
+
+O procedimento de frete especial (PROC-042 e PROC-042-v2) se aplica apenas a cargas com peso acima de 500kg. Uma carga de 300kg não se enquadra nesse procedimento.
+Não há informação nos chunks fornecidos sobre o cálculo de frete para cargas abaixo de 500kg com destino a Salvador ou qualquer outra região.
+Recomendação: Escalar para um supervisor ou consultar a tabela mensal de fretes padrão (fora do escopo dos documentos disponíveis) para obter o valor correto.
+
+Fontes consultadas:
+
+PROC-042-frete-especial-v1.md — Seção 1. Objetivo
+PROC-042-v2-frete-especial-revisado.md — Seções 1. Objetivo e 2. Fórmula de cálculo
+
+============
+
+PERGUNTA 04 - Carga perigosa com frete expresso?
+
+RESPOSTA:
+
+Resposta — Carga Perigosa com Frete Expresso
+Com base nos chunks disponíveis, não há informação específica sobre frete expresso para cargas perigosas. O que os documentos cobrem sobre cargas perigosas é:
+O que está documentado:
+Cálculo de frete especial:
+Cargas perigosas com peso acima de 500 kg seguem tabela específica da PROC-043 (Frete de Cargas Perigosas).
+⚠️ Atenção: a PROC-043 está em processo de revisão pelo Compliance e pode sofrer alterações.
+
+Fonte: PROC-042-v2-frete-especial-revisado.md — Seção 4 (versão mais recente; priorizada sobre PROC-042-v1)
+
+Classificação como incidente crítico:
+Qualquer irregularidade de documentação ou rastreamento em carga perigosa é automaticamente classificada como incidente crítico.
+
+Fonte: SLA-2024-tabela-sla-clientes.md — Seção 3
+
+Seguro de carga:
+Para cargas perigosas, o seguro adicional é de 0,8% do valor declarado (válido para contratos a partir de 2023 — confirmar com o Comercial para contratos anteriores).
+
+Fonte: FAQ-atendimento.md — Item 22
+
+⚠️ Recomendação:
+A pergunta sobre frete expresso especificamente para cargas perigosas não está coberta nos chunks disponíveis. 
+Recomendo escalar para o supervisor ou acionar diretamente o time de Operações/Comercial para obter as condições aplicáveis, especialmente considerando que a PROC-043 está em revisão.
+
+============
+
+PERGUNTA 05 - Qual o multiplicador para o Sudeste?
+
+RESPOSTA:
+
+Conflito de Fontes Identificado
+Existem duas versões do procedimento PROC-042 com valores diferentes para o multiplicador do Sudeste:
+VersãoMultiplicador SudesteFontePROC-042 v1 (antiga)1.0PROC-042-frete-especial-v1.md, Seção 2.1PROC-042 v2 (revisada)1.1PROC-042-v2-frete-especial-revisado.md, Seção 2.1 (atualizado nov/2023)
+Valor a usar: 1.1 (v2)
+Conforme orientação do FAQ-atendimento.md (Item 8), na dúvida deve-se usar a versão mais recente (v2). O FAQ também alerta que, se o cliente reclamar do valor, 
+o contrato dele pode ainda estar vinculado à tabela antiga (v1 — multiplicador 1.0), caso em que é necessário verificar o contrato específico do cliente antes de aplicar o cálculo.

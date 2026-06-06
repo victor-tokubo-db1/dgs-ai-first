@@ -1,0 +1,65 @@
+Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva e citacoes de fonte.
+
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 1. Objetivo
+Score: 0.5072
+ChunkID: f2af734ef3840e658f492465b25f1cf0cf3e30ed
+Conteudo:
+Definir a fórmula e os parâmetros para cálculo de frete especial aplicável a cargas com peso acima de 500kg.
+
+[CHUNK 2]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 1. Objetivo
+Score: 0.4566
+ChunkID: 828c4f4b55d2aea91ccf2d9dfce4860cd8079b1d
+Conteudo:
+Definir a fórmula e os parâmetros atualizados para cálculo de frete especial aplicável a cargas com peso acima de 500kg. Os multiplicadores foram revisados para refletir os custos operacionais atualizados de cada região.
+
+[CHUNK 3]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 27 — "O tracking mostra 'em trânsito' há 5 dias. O que faço?"
+Score: 0.4529
+ChunkID: f5138dc3995bdce675dc5cdcacacb4bfe7f7dd70
+Conteudo:
+Depende da rota. Rotas para o Norte podem levar até 10 dias úteis. Para Sul/Sudeste, mais de 3 dias parado é estranho. Abra um chamado de rastreamento e classifique como prioridade alta se for Gold ou se o valor da carga for acima de R$ 50.000.
+
+[CHUNK 4]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 2. Fórmula de cálculo
+Score: 0.4415
+ChunkID: dd404a488a97649b2ee5022afc760184b192917e
+Conteudo:
+O frete especial é calculado como:
+
+Valor do frete = Valor base × Multiplicador regional × Fator de peso
+
+Onde:
+- Valor base = tarifa publicada na tabela mensal de fretes.
+- Multiplicador regional = fator aplicado conforme a região de destino (seção 2.1).
+- Fator de peso = 1.0 para cargas de 500kg a 1.000kg; 1.15 para cargas de 1.001kg a 3.000kg; 1.4 para cargas acima de 3.000kg.
+
+[CHUNK 5]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 4. Condições especiais
+Score: 0.4395
+ChunkID: 13f99ec419d5c5a8574516e2dd634c79700520a0
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas). Nota: a PROC-043 está em processo de revisão pelo Compliance e pode sofrer alterações.
+- Descontos de volume: a partir de 8 fretes especiais/mês para o mesmo cliente, aplicar desconto de 5% sobre o multiplicador regional. Acima de 15 fretes/mês, desconto de 10%. Descontos maiores requerem aprovação da Diretoria Comercial.
+=== FIM DO CONTEXTO ===
+
+Pergunta do atendente:
+Frete para 300kg para Salvador?
+
+Responda agora, citando as fontes usadas.

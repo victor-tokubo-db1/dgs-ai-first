@@ -1,0 +1,33 @@
+AVALIAÇÃO
+
+Considerado como guardrails os seguintes itens:
+- responder só com base nos chunks;
+- citar fonte e seção;
+- não inventar prazos/valores;
+- escalar quando faltar informação;
+- sinalizar conflito entre fontes.
+
+1) PRIMEIRA PERGUNTA - "Qual o prazo de devolução?"
+Está correta? Pela fonte utilizada não.
+Citou fonte? Sim
+Respeitou guardrails? Considerando que nos chunks retornados no arquivo "Exercicio03/TAREFA-02/pergunta-01.txt", meio que pegou valor certo no lugar errado;
+
+2) SEGUNDA PERGUNTA - "Qual o SLA do cliente Platinum?"
+Está correta? Sim
+Citou fonte? Sim
+Respeitou guardrails? Sim
+
+3) TERCEIRA PERGUNTA - "Frete para 300kg para Salvador?"
+Está correta? Sim
+Citou fonte? Sim
+Respeitou guardrails? Sim, destacando escalar conflito para supervisor
+
+4) QUARTA PERGUNTA - "Carga perigosa com frete expresso?"
+Está correta? Não, pois respondeu fora do contexto esperado (de acordo com anexo B, Chunk FAQ-32)
+Citou fonte? Sim
+Respeitou guardrails? Sim, destacando escalar conflito para supervisor
+
+5) QUINTA PERGUNTA - "Qual o multiplicador para o Sudeste?"
+Está correta? Sim, porém deu uma importância maior ao FAQ, tratando-se mais de um documento de apoio não oficial
+Citou fonte? Sim
+Respeitou guardrails? Sim, principalmente citando conflito entre fontes
