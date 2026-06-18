@@ -1,0 +1,72 @@
+Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva e citacoes de fonte.
+
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.4. Devoluções parciais
+Score: 0.5234
+ChunkID: 24cee59c96e5df20dc608e69ec47cf9153d2ee8e
+Conteudo:
+Quando a entrega envolver múltiplos volumes, o cliente pode devolver volumes individuais. Cada volume devolvido segue o mesmo procedimento da seção 3.3. O cálculo de reembolso é proporcional ao peso/valor do volume devolvido, conforme o CT-e.
+
+[CHUNK 2]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 8 — "Como funciona o frete especial?"
+Score: 0.5100
+ChunkID: 9fdb0bd4961ca122e6f6bc79a2438ad07a7ce9f5
+Conteudo:
+Acima de 500kg, aplica a tabela de multiplicadores por região. Cuidado: existem duas versões da PROC-042. A mais recente tem multiplicadores mais altos. Na dúvida, use a mais recente (v2), mas se o cliente reclamar do valor, pode ser que o contrato dele ainda esteja na tabela antiga.
+
+[CHUNK 3]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 2. Fórmula de cálculo > 2.1. Multiplicadores regionais (atualizados em novembro/2023)
+Score: 0.4959
+ChunkID: 61967e9accdc8705cea60205f21fa7949b874bd8
+Conteudo:
+| Região | Multiplicador |
+|--------|--------------|
+| Sul | 1.3 |
+| Sudeste | 1.1 |
+| Centro-Oeste | 1.4 |
+| Nordeste | 1.5 |
+| Norte | 1.8 |
+
+[CHUNK 4]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 2. Fórmula de cálculo > 2.1. Multiplicadores regionais
+Score: 0.4944
+ChunkID: 907803a1cebcc00bef4785d84d0bb2ed5a0508e6
+Conteudo:
+| Região | Multiplicador |
+|--------|--------------|
+| Sul | 1.2 |
+| Sudeste | 1.0 |
+| Centro-Oeste | 1.3 |
+| Nordeste | 1.4 |
+| Norte | 1.6 |
+
+[CHUNK 5]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.3. Procedimento de devolução
+Score: 0.4894
+ChunkID: 809787c0a657544da77474e3f861a1d807998adf
+Conteudo:
+1. O cliente abre chamado no Portal do Cliente (portal.novatech.com.br), selecionando a categoria "Devolução de Mercadoria".
+2. O chamado deve incluir: número do CT-e (Conhecimento de Transporte Eletrônico), fotos da mercadoria no estado atual (mínimo 3 fotos: embalagem externa, etiqueta de identificação, e conteúdo), e motivo da devolução.
+3. O time de atendimento tem 4 horas úteis para triagem do chamado (verificar elegibilidade, documentação e prazo).
+4. Se elegível, a coleta reversa é agendada em até 2 dias úteis após aprovação.
+5. O reembolso ou crédito é processado em até 5 dias úteis após o recebimento da mercadoria devolvida no centro de distribuição.
+=== FIM DO CONTEXTO ===
+
+Pergunta do atendente:
+Qual o multiplicador para o Sudeste?
+
+Responda agora, citando as fontes usadas.

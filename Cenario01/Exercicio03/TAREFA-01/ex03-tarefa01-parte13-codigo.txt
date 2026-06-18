@@ -1,0 +1,79 @@
+from dataclasses import asdict, is_dataclass
+
+DEFAULT_SYSTEM_PROMPT = """Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva + citacoes de fonte.
+"""
+
+
+def _normalize_chunk(chunk: Any) -> dict[str, Any]:
+    if isinstance(chunk, SearchResult):
+        return {
+            "chunk_id": chunk.chunk_id,
+            "text": chunk.text,
+            "metadata": chunk.metadata,
+            "similarity_score": chunk.similarity_score,
+        }
+    if is_dataclass(chunk):
+        return asdict(chunk)
+    if isinstance(chunk, dict):
+        return chunk
+    raise TypeError(f"Tipo de chunk nao suportado: {type(chunk)}")
+
+
+def build_prompt(
+    question: str,
+    retrieved_chunks: list[Any],
+    system_prompt: str | None = None,
+) -> str:
+    """
+    Etapa 3: monta prompt completo (system prompt + chunks + pergunta),
+    pronto para envio ao LLM.
+    """
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("question deve ser uma string nao vazia")
+
+    if not isinstance(retrieved_chunks, list):
+        raise ValueError("retrieved_chunks deve ser uma lista")
+
+    final_system_prompt = system_prompt or DEFAULT_SYSTEM_PROMPT
+
+    context_lines: list[str] = []
+    if not retrieved_chunks:
+        context_lines.append("[CONTEXTO] Nenhum chunk recuperado.")
+    else:
+        for idx, chunk in enumerate(retrieved_chunks, start=1):
+            c = _normalize_chunk(chunk)
+            metadata = c.get("metadata", {}) or {}
+            source = metadata.get("source_document", "N/A")
+            secao = metadata.get("secao", "N/A")
+            score = float(c.get("similarity_score", 0.0))
+            chunk_id = c.get("chunk_id", "N/A")
+            text = str(c.get("text", "")).strip()
+
+            context_lines.append(f"[CHUNK {idx}]")
+            context_lines.append(f"Fonte: {source}")
+            context_lines.append(f"Secao: {secao}")
+            context_lines.append(f"Score: {score:.4f}")
+            context_lines.append(f"ChunkID: {chunk_id}")
+            context_lines.append("Conteudo:")
+            context_lines.append(text)
+            context_lines.append("")
+
+    context_block = "\n".join(context_lines)
+
+    prompt = (
+        f"{final_system_prompt}\n\n"
+        f"=== CONTEXTO RECUPERADO ===\n"
+        f"{context_block}\n"
+        f"=== FIM DO CONTEXTO ===\n\n"
+        f"Pergunta do atendente:\n{question}\n\n"
+        f"Responda agora, citando as fontes usadas."
+    )
+
+    return prompt

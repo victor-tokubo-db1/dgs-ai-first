@@ -1,0 +1,65 @@
+Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva e citacoes de fonte.
+
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 4. Condições especiais
+Score: 0.5789
+ChunkID: 28e3ad36e1307f80060bf96b3b2b60e4824bf0bd
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas).
+- Descontos de volume (mais de 10 fretes especiais/mês para o mesmo cliente) devem ser negociados pelo Comercial e registrados em aditivo contratual.
+
+[CHUNK 2]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 3. Definição de incidente crítico
+Score: 0.5655
+ChunkID: bb7fea777866cef11e7038b974ca06a67c984ecf
+Conteudo:
+Um incidente é classificado como crítico quando atende a pelo menos um dos seguintes critérios:
+
+- Carga com valor declarado acima de R$ 100.000 está com status desconhecido há mais de 6 horas.
+- Carga perigosa com qualquer irregularidade de documentação ou rastreamento.
+- Mais de 5 chamados do mesmo cliente nas últimas 24 horas sobre o mesmo problema.
+- Qualquer situação que envolva risco à segurança de pessoas.
+
+[CHUNK 3]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 22 — "Cliente quer saber sobre seguro de carga. O que falar?"
+Score: 0.5439
+ChunkID: 5339eb950a44ab54d0b1cf33274f8c5e1fdcaa9c
+Conteudo:
+A NovaTech oferece seguro de carga como adicional. O valor é 0,3% do valor declarado da mercadoria para cargas padrão e 0,8% para cargas perigosas. Detalhe: isso vale para contratos a partir de 2023. Contratos mais antigos podem ter percentuais diferentes — confirme com o Comercial.
+
+[CHUNK 4]
+Fonte: PROC-042-v2-frete-especial-revisado.md
+Secao: PROC-042-v2 — Procedimento de Cálculo de Frete Especial (Revisado) > 4. Condições especiais
+Score: 0.5178
+ChunkID: 13f99ec419d5c5a8574516e2dd634c79700520a0
+Conteudo:
+- Cargas acima de 5.000kg requerem aprovação prévia do gerente de operações regional.
+- Cargas perigosas com peso acima de 500kg seguem tabela específica (PROC-043: Frete de Cargas Perigosas). Nota: a PROC-043 está em processo de revisão pelo Compliance e pode sofrer alterações.
+- Descontos de volume: a partir de 8 fretes especiais/mês para o mesmo cliente, aplicar desconto de 5% sobre o multiplicador regional. Acima de 15 fretes/mês, desconto de 10%. Descontos maiores requerem aprovação da Diretoria Comercial.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 38 — "Cliente quer saber a política para carga que chegou danificada."
+Score: 0.5147
+ChunkID: 676ba9fe4d99c0e1d45c5bc7f9affc9b24bc6b0a
+Conteudo:
+Carga danificada em trânsito tem processo diferente de devolução. O cliente precisa registrar a ocorrência em até 48h após o recebimento, com fotos e laudo se possível. A NovaTech investiga e, se comprovada responsabilidade nossa, reembolsa integralmente. Mas isso passa pelo Jurídico, não pelo atendimento normal — encaminhe para o e-mail sinistros@novatech.com.br.
+=== FIM DO CONTEXTO ===
+
+Pergunta do atendente:
+Carga perigosa com frete expresso?
+
+Responda agora, citando as fontes usadas.

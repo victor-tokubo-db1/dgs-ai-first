@@ -1,0 +1,288 @@
+
+# Análise Técnica NovaTech (Versão Revisada)
+
+Este documento incorpora as observações de revisão técnica identificadas durante a avaliação da proposta original.
+
+## 1. PDFs com tabelas complexas
+
+### Desafios
+- Extração de estruturas tabulares complexas.
+- Perda de contexto entre páginas.
+- Múltiplas versões de tabelas coexistindo.
+
+### Recomendações
+- Utilizar Azure AI Document Intelligence.
+- Converter tabelas para estruturas normalizadas.
+- Avaliar se tabelas críticas de frete devem ser migradas para uma Rule Engine ou base estruturada em vez de permanecerem exclusivamente em RAG.
+- Implementar versionamento e deduplicação de tabelas.
+
+---
+
+## 2. Fluxogramas embutidos como imagens
+
+### Desafios
+- OCR pode não capturar corretamente a lógica de decisão.
+- Fluxogramas complexos podem perder significado quando convertidos para texto.
+
+### Recomendações
+- Utilizar processamento multimodal.
+- Gerar representação textual e estrutural dos fluxos.
+- Validar amostras manualmente durante a ingestão.
+
+---
+
+## 3. PDFs escaneados
+
+### Desafios
+- Dependência da qualidade do OCR.
+- Possibilidade de extrações incorretas em documentos antigos.
+
+### Recomendações
+- Medir score de confiança OCR.
+- Estabelecer fluxo de revisão humana para documentos críticos.
+- Monitorar taxa de erro de OCR ao longo do projeto.
+
+---
+
+## 4. Wiki Confluence
+
+### Desafios
+- Perda de contexto entre páginas relacionadas.
+- Dependência de links internos.
+- Presença de macros customizadas.
+
+### Recomendações
+- Preservar relacionamentos entre páginas.
+- Implementar expansão de contexto baseada em links.
+- Avaliar uso de Graph RAG para conteúdos altamente interligados.
+
+---
+
+## 5. Macros do Confluence
+
+### Risco adicional identificado
+
+Nem todas as macros são estáticas.
+
+Podem existir:
+
+- Macros estáticas.
+- Macros dinâmicas.
+- Macros que consultam sistemas externos.
+
+### Recomendações
+
+- Inventariar macros existentes.
+- Classificar cada macro por criticidade.
+- Definir estratégia específica para conteúdo dinâmico.
+
+---
+
+## 6. Planilhas com fórmulas interdependentes
+
+### Risco adicional identificado
+
+A complexidade pode ser superior à prevista devido a:
+
+- Fórmulas encadeadas.
+- Múltiplas abas.
+- VBA.
+- Macros Excel.
+
+### Recomendações
+
+- Inventariar fórmulas e dependências.
+- Avaliar migração das regras para Rule Engine.
+- Separar claramente consulta documental da execução de cálculos.
+
+---
+
+# Governança Documental
+
+## Novo requisito identificado
+
+O cenário informa existência de documentos contraditórios.
+
+### Recomendações
+
+- Implementar estratégia de versionamento.
+- Definir documento oficial por domínio.
+- Criar política de arquivamento.
+- Implementar deduplicação durante ingestão.
+
+### Risco
+
+Sem governança documental, o RAG pode recuperar versões conflitantes simultaneamente.
+
+---
+
+# Segurança e Controle de Acesso
+
+## Lacuna identificada
+
+A proposta original não detalha permission-aware retrieval.
+
+### Recomendações
+
+- Indexar ACLs dos documentos.
+- Implementar security trimming.
+- Aplicar permissões herdadas do SharePoint e Confluence.
+
+### Risco
+
+Usuários podem visualizar conteúdo fora de sua alçada de acesso.
+
+---
+
+# Estimativa de Volume
+
+## Revisão das premissas
+
+A estimativa original considerou aproximadamente 6,2 milhões de tokens.
+
+### Risco identificado
+
+A presença de:
+
+- OCR;
+- tabelas;
+- fluxogramas;
+- macros;
+- metadados adicionais;
+
+pode elevar significativamente o volume indexado.
+
+### Nova faixa recomendada
+
+- Estimativa inicial: 6,2 milhões de tokens.
+- Faixa mais realista após enriquecimento: 8 a 12 milhões de tokens.
+- Cenários mais complexos podem atingir 12 a 18 milhões de tokens.
+
+### Recomendação
+
+Executar piloto de ingestão antes da estimativa definitiva de custos.
+
+---
+
+# Custos de Embeddings e Reindexação
+
+## Lacuna identificada
+
+A proposta original não considerou custos recorrentes.
+
+### Recomendações
+
+Dimensionar:
+
+- Embedding inicial.
+- Reprocessamento mensal.
+- Reindexação incremental.
+- Custos de armazenamento vetorial.
+
+---
+
+# Estratégia de Chunking
+
+## Revisão
+
+As faixas originais permanecem adequadas como ponto de partida:
+
+- Políticas: 500–700 tokens.
+- Wiki: 500–800 tokens.
+- Procedimentos: 800–1.200 tokens.
+- Fluxogramas: 300–600 tokens.
+
+### Ajuste recomendado
+
+Realizar benchmark com:
+
+- 300 tokens.
+- 500 tokens.
+- 800 tokens.
+- 1.200 tokens.
+
+Avaliar:
+
+- Recall@K.
+- Precision@K.
+- Groundedness.
+
+---
+
+# Lost in the Middle
+
+## Validação
+
+A recomendação de recuperar apenas os chunks mais relevantes continua válida.
+
+### Ajuste recomendado
+
+Adicionar Query Decomposition para perguntas complexas.
+
+Fluxo:
+
+Pergunta
+↓
+Subperguntas
+↓
+Recuperação independente
+↓
+Síntese final
+
+---
+
+# Avaliação Contínua do RAG
+
+## Lacuna crítica identificada
+
+A proposta original não definiu métricas formais de qualidade.
+
+### Recomendações
+
+Construir conjunto de avaliação com perguntas reais.
+
+Medir:
+
+- Recall@K.
+- Precision@K.
+- MRR.
+- Faithfulness.
+- Groundedness.
+- Answer Relevance.
+
+---
+
+# Cronograma
+
+## Revisão do prazo
+
+O prazo original de 3 meses pode ser otimista.
+
+### Fatores de risco
+
+- Qualidade dos documentos.
+- OCR.
+- Conflitos documentais.
+- Complexidade das planilhas.
+- Macros do Confluence.
+
+### Expectativa revisada
+
+- Cenário otimista: 3 meses.
+- Cenário mais provável: 4 a 6 meses.
+
+---
+
+# Conclusão Executiva
+
+Os maiores riscos do projeto são:
+
+1. Governança documental e conflitos de versões.
+2. Segurança baseada em ACL.
+3. Custos de embeddings e reindexação.
+4. Regras de negócio escondidas em planilhas e tabelas.
+5. Ausência de métricas formais de avaliação do RAG.
+6. Possível subdimensionamento do volume documental.
+7. Complexidade das macros e conteúdos dinâmicos.
+
+Esses pontos devem fazer parte do discovery e da arquitetura alvo antes do go-live.

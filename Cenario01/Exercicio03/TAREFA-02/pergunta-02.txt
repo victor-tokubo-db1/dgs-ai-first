@@ -1,0 +1,66 @@
+Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva e citacoes de fonte.
+
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 15 — "Cliente diz que é Platinum. Existe esse tier?"
+Score: 0.5382
+ChunkID: 0af9074aa24c5a0d44d5f35a3808a31e85e6ce2c
+Conteudo:
+Não existe tier Platinum na NovaTech. Às vezes o cliente confunde com outra transportadora ou com o programa de fidelidade antigo que foi descontinuado em 2022. Oriente que nossos tiers são Gold, Silver e Standard e peça o número do contrato para verificar.
+
+[CHUNK 2]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 5. Medição e reportes
+Score: 0.5030
+ChunkID: 5ff68267786091b39f13aafd01c113c10261094f
+Conteudo:
+Os SLAs são medidos pelo sistema de chamados (Azure DevOps) a partir do timestamp de abertura do chamado. O relógio de SLA pausa fora do horário comercial (08h-18h, dias úteis) para chamados gerais, mas não pausa para incidentes críticos de clientes Gold.
+
+[CHUNK 3]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 1. Classificação de clientes
+Score: 0.4996
+ChunkID: a85c4143827ce6a4b4da8d5b9e83839b32c8fd39
+Conteudo:
+A NovaTech classifica seus clientes em 3 (três) tiers com base no volume mensal de operações e no valor do contrato:
+
+| Tier | Critério de elegibilidade | Revisão |
+|------|--------------------------|---------|
+| Gold | Contrato anual acima de R$ 500.000 OU mais de 200 operações/mês | Semestral |
+| Silver | Contrato anual entre R$ 100.000 e R$ 500.000 OU entre 50 e 200 operações/mês | Semestral |
+| Standard | Todos os demais clientes | Anual |
+
+Nota: Não existem outros tiers além dos três listados acima. Solicitações de SLA diferenciado fora desses tiers devem ser encaminhadas ao Comercial para análise de viabilidade.
+
+[CHUNK 4]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.5. Custos de devolução
+Score: 0.4962
+ChunkID: 7011ce627cb76789e2762cd8d06a683c47cb79c8
+Conteudo:
+- Defeito ou erro da NovaTech (carga errada, avaria em trânsito): devolução sem custo para o cliente.
+- Desistência do cliente (carga correta, sem defeito): o custo do frete reverso é do cliente, calculado com os mesmos multiplicadores do frete original.
+- Prazo expirado (solicitação após 7 dias úteis): não elegível para devolução padrão. Encaminhar ao Comercial para negociação caso a caso.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte > Perguntas selecionadas (das 47 do documento original) > Item 3 — "Cliente perguntou se pode devolver carga perigosa. O que respondo?"
+Score: 0.4682
+ChunkID: ca0d7aca5177dabb9b8ffdd6d385ba14386c9510
+Conteudo:
+Na prática, a gente orienta o cliente a ligar no ramal 4500 (Gestão de Riscos). Oficialmente não pode pelo processo padrão, mas já tiveram casos em que o pessoal de Riscos autorizou exceção. Então não diga que é impossível — diga que precisa de tratamento especial.
+=== FIM DO CONTEXTO ===
+
+Pergunta do atendente:
+Qual o SLA do cliente Platinum?
+
+Responda agora, citando as fontes usadas.

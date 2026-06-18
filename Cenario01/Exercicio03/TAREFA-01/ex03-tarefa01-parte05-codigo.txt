@@ -1,0 +1,231 @@
+# ingest_rag_minimo.py
+# Etapa 1: Ingestao -> ler docs, chunking semantico, embeddings, armazenamento no ChromaDB
+
+from __future__ import annotations
+
+import hashlib
+import re
+from pathlib import Path
+from typing import List, Dict, Tuple
+
+import chromadb
+from chromadb.utils import embedding_functions
+from sentence_transformers import SentenceTransformer
+
+
+# ---------------------------
+# Configuracao
+# ---------------------------
+BASE_DIR = Path(__file__).resolve().parent
+DOCS = [
+    "POL-001-politica-devolucao.md",
+    "PROC-042-frete-especial-v1.md",
+    "PROC-042-v2-frete-especial-revisado.md",
+    "SLA-2024-tabela-sla-clientes.md",
+    "FAQ-atendimento.md",
+]
+
+CHROMA_DIR = BASE_DIR / "chroma_db"
+COLLECTION_NAME = "novatech_docs"
+EMBED_MODEL = "all-MiniLM-L6-v2"
+
+# Alvo de chunking:
+# - chunk semantico por secao
+# - tentativa de manter 300-500 tokens (aprox por palavras)
+# - overlap pequeno entre partes divididas de secoes longas
+MAX_WORDS = 420
+OVERLAP_WORDS = 60
+
+
+# ---------------------------
+# Helpers de parsing
+# ---------------------------
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$", re.MULTILINE)
+META_LINE_RE = re.compile(r"^\*\*(.+?)\*\*:\s*(.+?)\s*$")
+
+def approx_words(text: str) -> int:
+    return len(re.findall(r"\S+", text))
+
+
+def split_md_sections(md_text: str) -> List[Tuple[str, str]]:
+    """
+    Divide markdown por headings.
+    Retorna lista de (section_path, section_text).
+    """
+    matches = list(HEADING_RE.finditer(md_text))
+    if not matches:
+        return [("documento_completo", md_text.strip())]
+
+    sections: List[Tuple[str, str]] = []
+    stack: List[str] = []
+
+    for i, m in enumerate(matches):
+        level = len(m.group(1))
+        title = m.group(2).strip()
+
+        while len(stack) >= level:
+            stack.pop()
+        stack.append(title)
+
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(md_text)
+        body = md_text[start:end].strip()
+
+        if body:
+            section_path = " > ".join(stack)
+            sections.append((section_path, body))
+
+    return sections
+
+
+def split_long_text_with_overlap(text: str, max_words: int, overlap_words: int) -> List[str]:
+    words = text.split()
+    if len(words) <= max_words:
+        return [text.strip()]
+
+    chunks = []
+    start = 0
+    n = len(words)
+    while start < n:
+        end = min(start + max_words, n)
+        chunk_words = words[start:end]
+        chunks.append(" ".join(chunk_words).strip())
+        if end == n:
+            break
+        start = max(0, end - overlap_words)
+
+    return chunks
+
+
+def extract_doc_metadata(md_text: str, filename: str) -> Dict[str, str]:
+    """
+    Extrai metadados simples do cabecalho markdown.
+    """
+    meta = {
+        "source_document": filename,
+        "versao": "",
+        "data": "",
+        "responsavel": "",
+        "classificacao": "",
+        "prioridade_fonte": "baixa",  # default
+    }
+
+    # prioridade por tipo de documento
+    if filename.startswith("POL-") or filename.startswith("PROC-") or filename.startswith("SLA-"):
+        meta["prioridade_fonte"] = "alta"
+    if filename.startswith("FAQ-"):
+        meta["prioridade_fonte"] = "baixa"
+
+    # linhas de metadata comuns no topo
+    for line in md_text.splitlines()[:40]:
+        line = line.strip()
+        m = META_LINE_RE.match(line)
+        if not m:
+            continue
+        key, value = m.group(1).strip().lower(), m.group(2).strip()
+
+        if "vers" in key:
+            meta["versao"] = value
+        elif "atualiza" in key or "emiss" in key:
+            meta["data"] = value
+        elif "respons" in key:
+            meta["responsavel"] = value
+        elif "classifica" in key or "status" in key:
+            meta["classificacao"] = value
+
+    return meta
+
+
+def make_chunk_id(filename: str, section_path: str, idx: int, content: str) -> str:
+    base = f"{filename}|{section_path}|{idx}|{content[:120]}"
+    return hashlib.sha1(base.encode("utf-8")).hexdigest()
+
+
+def build_chunks_for_document(doc_path: Path) -> List[Dict]:
+    text = doc_path.read_text(encoding="utf-8")
+    base_meta = extract_doc_metadata(text, doc_path.name)
+
+    section_pairs = split_md_sections(text)
+    chunks: List[Dict] = []
+
+    for section_path, section_text in section_pairs:
+        # Preserva listas e tabelas por secao sempre que possivel.
+        # Se estourar tamanho alvo, divide com overlap.
+        parts = split_long_text_with_overlap(section_text, MAX_WORDS, OVERLAP_WORDS)
+
+        for i, part in enumerate(parts):
+            chunk_id = make_chunk_id(doc_path.name, section_path, i, part)
+            chunk_meta = {
+                **base_meta,
+                "secao": section_path,
+                "chunk_index_secao": str(i),
+                "chunk_words": str(approx_words(part)),
+                "file_path": str(doc_path),
+            }
+            chunks.append(
+                {
+                    "id": chunk_id,
+                    "text": part,
+                    "metadata": chunk_meta,
+                }
+            )
+
+    return chunks
+
+
+# ---------------------------
+# Ingestao no ChromaDB
+# ---------------------------
+def ingest():
+    # Inicializa modelo local (sentence-transformers)
+    model = SentenceTransformer(EMBED_MODEL)
+
+    # Chroma com funcao de embedding customizada
+    class STEmbeddingFn(embedding_functions.EmbeddingFunction):
+        def __call__(self, input: List[str]) -> List[List[float]]:
+            emb = model.encode(input, normalize_embeddings=True)
+            return emb.tolist()
+
+    client = chromadb.PersistentClient(path=str(CHROMA_DIR))
+    collection = client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        embedding_function=STEmbeddingFn(),
+        metadata={"hnsw:space": "cosine"},
+    )
+
+    # Reingestao simples: limpa colecao para evitar duplicacao durante testes
+    existing = collection.count()
+    if existing > 0:
+        all_ids = collection.get(include=[])["ids"]
+        if all_ids:
+            collection.delete(ids=all_ids)
+
+    total_chunks = 0
+    for fname in DOCS:
+        path = BASE_DIR / fname
+        if not path.exists():
+            print(f"[AVISO] Arquivo nao encontrado: {path}")
+            continue
+
+        doc_chunks = build_chunks_for_document(path)
+        if not doc_chunks:
+            print(f"[AVISO] Sem chunks gerados para: {fname}")
+            continue
+
+        collection.add(
+            ids=[c["id"] for c in doc_chunks],
+            documents=[c["text"] for c in doc_chunks],
+            metadatas=[c["metadata"] for c in doc_chunks],
+        )
+
+        total_chunks += len(doc_chunks)
+        print(f"[OK] {fname}: {len(doc_chunks)} chunks")
+
+    print(f"\nIngestao concluida.")
+    print(f"Colecao: {COLLECTION_NAME}")
+    print(f"Total de chunks: {total_chunks}")
+    print(f"Diretorio Chroma: {CHROMA_DIR}")
+
+
+if __name__ == "__main__":
+    ingest()

@@ -1,0 +1,72 @@
+Voce e um assistente de atendimento da NovaTech.
+Regras obrigatorias:
+1) Responda apenas com base nos chunks fornecidos.
+2) Sempre cite fonte e secao usadas.
+3) Nunca invente prazos, valores ou politicas.
+4) Se nao houver informacao suficiente, diga explicitamente e recomende escalar para supervisor.
+5) Em caso de conflito entre fontes, informe o conflito e priorize documentos normativos/contratuais.
+Formato: resposta objetiva e citacoes de fonte.
+
+
+=== CONTEXTO RECUPERADO ===
+[CHUNK 1]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.5. Custos de devolução
+Score: 0.5648
+ChunkID: 7011ce627cb76789e2762cd8d06a683c47cb79c8
+Conteudo:
+- Defeito ou erro da NovaTech (carga errada, avaria em trânsito): devolução sem custo para o cliente.
+- Desistência do cliente (carga correta, sem defeito): o custo do frete reverso é do cliente, calculado com os mesmos multiplicadores do frete original.
+- Prazo expirado (solicitação após 7 dias úteis): não elegível para devolução padrão. Encaminhar ao Comercial para negociação caso a caso.
+
+[CHUNK 2]
+Fonte: POL-001-politica-devolucao.md
+Secao: POL-001 — Política de Devolução de Mercadorias > 3. Regras de Devolução > 3.3. Procedimento de devolução
+Score: 0.5305
+ChunkID: 809787c0a657544da77474e3f861a1d807998adf
+Conteudo:
+1. O cliente abre chamado no Portal do Cliente (portal.novatech.com.br), selecionando a categoria "Devolução de Mercadoria".
+2. O chamado deve incluir: número do CT-e (Conhecimento de Transporte Eletrônico), fotos da mercadoria no estado atual (mínimo 3 fotos: embalagem externa, etiqueta de identificação, e conteúdo), e motivo da devolução.
+3. O time de atendimento tem 4 horas úteis para triagem do chamado (verificar elegibilidade, documentação e prazo).
+4. Se elegível, a coleta reversa é agendada em até 2 dias úteis após aprovação.
+5. O reembolso ou crédito é processado em até 5 dias úteis após o recebimento da mercadoria devolvida no centro de distribuição.
+
+[CHUNK 3]
+Fonte: PROC-042-frete-especial-v1.md
+Secao: PROC-042 — Procedimento de Cálculo de Frete Especial > 3. Prazo de entrega para frete especial
+Score: 0.5254
+ChunkID: 5705b3528360746258510016cc50f02771e6b7d6
+Conteudo:
+O prazo de entrega para frete especial é calculado como o prazo padrão da rota + 2 dias úteis adicionais para manuseio de carga pesada.
+
+[CHUNK 4]
+Fonte: SLA-2024-tabela-sla-clientes.md
+Secao: SLA-2024 — Tabela de SLA por Tipo de Cliente > 3. Definição de incidente crítico
+Score: 0.5059
+ChunkID: bb7fea777866cef11e7038b974ca06a67c984ecf
+Conteudo:
+Um incidente é classificado como crítico quando atende a pelo menos um dos seguintes critérios:
+
+- Carga com valor declarado acima de R$ 100.000 está com status desconhecido há mais de 6 horas.
+- Carga perigosa com qualquer irregularidade de documentação ou rastreamento.
+- Mais de 5 chamados do mesmo cliente nas últimas 24 horas sobre o mesmo problema.
+- Qualquer situação que envolva risco à segurança de pessoas.
+
+[CHUNK 5]
+Fonte: FAQ-atendimento.md
+Secao: FAQ-Atendimento — Perguntas Frequentes do Time de Suporte
+Score: 0.4756
+ChunkID: d2399652d27640f71c513474cefd639ed47c8bf0
+Conteudo:
+**Versão:** Não controlada
+**Última atualização:** Diversas (documento colaborativo)
+**Responsável:** Nenhum responsável formal — mantido informalmente pelo time de atendimento
+**Classificação:** Documento informal — NÃO validado por Compliance ou Operações. Representa o conhecimento prático do time, mas pode conter informações desatualizadas ou imprecisas.
+
+Aviso interno: Este FAQ foi criado organicamente pelo time de atendimento ao longo de 2 anos. As respostas refletem a experiência prática dos atendentes, mas NÃO foram validadas contra os documentos oficiais (POL, PROC, SLA). Use com cautela e sempre confirme informações críticas na documentação normativa.
+=== FIM DO CONTEXTO ===
+
+Pergunta do atendente:
+Qual o prazo de devolução?
+
+Responda agora, citando as fontes usadas

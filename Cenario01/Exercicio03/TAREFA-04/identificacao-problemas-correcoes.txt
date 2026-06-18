@@ -1,0 +1,10 @@
+4. Identifique ao menos 2 problemas encontrados (ex: chunk errado recuperado, documento irrelevante no topo, chunking que cortou uma tabela no meio) e proponha correções.
+
+Problema 1 - Nível de importância dada ao FAQ
+Correção: Usar alguns critérios para fazer ranqueamento após busca inicial, para dar um peso maior para fontes mais confiáveis e peso menor para fontes menos confiáveis. 
+
+Problema 2 - Chunk errado recuperado
+Correção: Aprimorar filtragem para evitar trazer chunks com pouca relevância, conforme visto em algumas respostas
+
+Problema 3 - Documento irrelevante no topo
+Correção: Adicionar score mínimo para evitar documento irrelevante esteja no topo

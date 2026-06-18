@@ -1,0 +1,19 @@
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Busca + Montagem de Prompt")
+    parser.add_argument("question", type=str, help="Pergunta para busca")
+    parser.add_argument("-n", "--n-results", type=int, default=5, help="Top N chunks")
+    parser.add_argument(
+        "--build-prompt",
+        action="store_true",
+        help="Monta prompt completo com os chunks recuperados",
+    )
+    args = parser.parse_args()
+
+    matches = search_similar_chunks(args.question, n_results=args.n_results)
+
+    if args.build_prompt:
+        full_prompt = build_prompt(args.question, matches)
+        print(full_prompt)
+    else:
+        print(f"Pergunta: {args.question}")
+        print(f"Resultados: {len(matches)}")
