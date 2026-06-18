@@ -1,0 +1,34 @@
+{
+  "servers": {
+    "novatech-code": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./src", "./specs", "./skills"],
+      "env": {}
+    },
+    "novatech-docs": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./docs/novatech"],
+      "env": {
+        "READ_ONLY": "true"
+      }
+    },
+    "novatech-corpus": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./data/retrieval-corpus"],
+      "env": {
+        "READ_ONLY": "true"
+      }
+    },
+    "novatech-git": {
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."]
+    },
+    "novatech-memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": ".mcp/memory.jsonl"
+      }
+    }
+  }
+}
